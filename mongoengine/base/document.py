@@ -90,7 +90,8 @@ class BaseDocument(object):
 
         # Assign default values to instance
         for key, field in self._fields.iteritems():
-            if self._db_field_map.get(key, key) in __only_fields:
+            db_key = self._db_field_map.get(key, key)
+            if db_key in __only_fields and db_key in values:
                 continue
             value = getattr(self, key, None)
             setattr(self, key, value)
